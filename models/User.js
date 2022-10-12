@@ -1,8 +1,11 @@
+// import Model class and DataTypes objects 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// creates a User model
+// import bcrypt for hashing passwords 
+const bcrypt = require('bcrypt');
 
+// creates a User model
 class User extends Model {}
 
 // define table columns and configs
@@ -30,7 +33,15 @@ User.init(
             }
         }
     },
-    {
+    {   
+        // injected before the user is created, to hash the password 
+        hooks: {
+            // creates hashing before new instance of user creation 
+            async beforeCreate(newUserData) {
+                newUserData.password  = await bcrypt.hash(newUserData.password, 10);
+                    return newUserData ;  
+            }
+        },
         sequelize,
         timestamps: false,
         freezeTableName: true,
