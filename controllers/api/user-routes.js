@@ -4,7 +4,7 @@ const router = require('express').Router();
 // import models 
 const { User, Post, Comment } = require('../../models');
 
-//============================= API ROUTES =============================//
+//============================= USER API ROUTES =============================//
 
 // GET, get all users 
 router.get('/', (req, res) => {

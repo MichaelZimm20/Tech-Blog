@@ -20,14 +20,9 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // define an post_url column
-        post_url: {
+        posted_note: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                // verfiying the string is a url 
-                isURL: true
-            }
         },
          // define an user_id column
          user_id: {
