@@ -40,7 +40,14 @@ User.init(
             async beforeCreate(newUserData) {
                 newUserData.password  = await bcrypt.hash(newUserData.password, 10);
                     return newUserData ;  
+            }, 
+              // creates hashing during the update of an instance of user 
+              async beforeUpdate(updateUserData) {
+                updateUserData.password  = await bcrypt.hash(updateUserData.password, 10);
+                    return updateUserData ;  
             }
+
+
         },
         sequelize,
         timestamps: false,

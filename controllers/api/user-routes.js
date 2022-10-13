@@ -57,10 +57,13 @@ router.post('/', (req,res) => {
 
 
 // PUT, UPDATE user by ID 
-router.post('/:id', (req,res) => {
+router.put('/:id', (req,res) => {
     // expecting { username: 'MZimm20', password: 'password' } // password is a min of 8 characters.
+   
+    // passing the req.body to only update what is being passed through
     const body = req.body;
     User.update(body, { 
+        individualHooks: true,
         where: {
             id: req.params.id
         }
