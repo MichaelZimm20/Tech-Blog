@@ -56,6 +56,28 @@ router.post('/', (req,res) => {
 });
 
 
+// POST, user login authentication
+router.post('/login', (req,res) => {
+    User.findOne({ where: { username: req.body.username } })
+    .then(loggedInUserData => {
+        if(!loggedInUserData) {
+            res.status(400).json({ message: 'Username cannot be found! ' })
+            return;
+        }
+
+        // checking to see if the user typed in correct password using checkPassword.
+        const confirmedPw = loggedInUserData.checkPassword(req.body.password);
+        
+        // if not correct, notify the user of incorrect password
+        if(!confirmedPw) {
+            res.status(400).json({ message: 'Incorrect Password, please try again! ' })
+            return;
+        }
+        // if correct, log user in and notify the user
+        res.json({ user: loggedInUserData, message: 'You are now logged in! Welcome to the Tech-Blog!'});
+    })
+});
+
 // PUT, UPDATE user by ID 
 router.put('/:id', (req,res) => {
     // expecting { username: 'MZimm20', password: 'password' } // password is a min of 8 characters.
