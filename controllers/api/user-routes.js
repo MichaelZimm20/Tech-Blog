@@ -8,7 +8,10 @@ const { User, Post, Comment } = require('../../models');
 
 // GET, get all users 
 router.get('/', (req, res) => {
-    User.findAll({})
+    User.findAll({
+        // PASSWORD protection
+        attributes: { exclude: ['password'] }
+    })
         .then(allUserData => res.json(allUserData))
         .catch(err => {
             console.log(err);
@@ -19,6 +22,9 @@ router.get('/', (req, res) => {
 // GET, get users by ID 
 router.get('/:id', (req, res) => {
     User.findOne({
+        // PASSWORD protection
+        attributes: { exclude: ['password'] },
+        // get the id parameter
         where: { id: req.params.id }
     })
         .then(singleUserData => {
@@ -49,6 +55,47 @@ router.post('/', (req,res) => {
     });
 });
 
+
+// PUT, UPDATE user by ID 
+router.post('/:id', (req,res) => {
+    // expecting { username: 'MZimm20', password: 'password' } // password is a min of 8 characters.
+    const body = req.body;
+    User.update(body, { 
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(updateUserData => {
+        if(!updateUserData[0]) {
+            res.status(404).json({ message: 'No user found with this id' });
+        } 
+        res.json(updateUserData)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+
+// DELETE, DESTROY user by ID 
+router.post('/:id', (req,res) => {
+    User.destroy({ 
+        where: {
+            id: req.params.id
+        }
+    })
+    .then(destroyUserData => {
+        if(!destroyUserData) {
+            res.status(404).json({ message: 'No user found with this id' });
+        } 
+        res.json(destroyUserData)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 
 
