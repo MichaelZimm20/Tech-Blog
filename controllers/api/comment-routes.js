@@ -10,10 +10,7 @@ const { findAll } = require('../../models/User');
 
 // GET, get all comments from a user 
 router.get('/', (req, res) => {
-    Comment.findAll({
-        // PASSWORD protection
-        attributes: { exclude: ['password'] }
-    })
+    Comment.findAll()
         .then(allUserCommentData => res.json(allUserCommentData))
         .catch(err => {
             console.log(err);

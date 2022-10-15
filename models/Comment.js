@@ -26,7 +26,7 @@ Comment.init(
             allowNull: false,
             references: {
                 model: 'user',
-                key: id
+                key: 'id'
             }
         },
         post_id: {
@@ -34,7 +34,7 @@ Comment.init(
             allowNull: false,
             references: {
                 model: 'post',
-                key: id
+                key: 'id'
             }
         }
     },
