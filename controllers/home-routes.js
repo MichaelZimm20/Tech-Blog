@@ -8,7 +8,7 @@ const { Post, User , Comment } = require('../models');
 // GET, get all comments from a user 
 router.get('/', (req, res) => {
     console.log('======================');
-    Post.findAll({ 
+    Post.findAll({
         attributes: ['id', 'title', 'posted_note', 'created_at'],
 
         // JOIN tables 
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
                 model: Comment,
                 attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
-                    model: User, 
+                    model: User,
                     attributes: ['username']
                 }
             },
@@ -26,8 +26,8 @@ router.get('/', (req, res) => {
                 attributes: ['username']
             }
         ]
-        })
-        .then(dbPostData => {     
+    })
+        .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }))
             // render homepage handlebars to display html
             res.render('homepage', { posts });
@@ -36,11 +36,14 @@ router.get('/', (req, res) => {
             console.log(err);
             res.status(500).json(err)
         });
-   
-    
 });
 
 
+
+// GET , get and render login handlebars page 
+router.get('/login', (req,res) => {
+    res.render('login');
+})
 
 // export router
 module.exports = router;
