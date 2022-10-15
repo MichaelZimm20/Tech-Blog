@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MZimm20 Tech Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="wrapper">
+    <nav class= 'navbar navbar-expand-lg border-bottom'>
+        <a class="navbar-brand" href="/">MZimm20 Tech Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        
+         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                <button id="logout" class="btn btn-sm btn-outline-secondary" type="button">logout</button>
+                <a class="nav-link" href="/login">login</a>
+            </div>
+        </div>
+    </nav>
+    <main>
+      {{{ body }}}
+    </main>
+    <footer>
+      Thanks for visiting!
+    </footer>
+  </div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+</html>
