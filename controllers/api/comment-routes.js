@@ -2,8 +2,8 @@
 const router = require('express').Router();
 
 // import models 
-const { Post, User , Comment } = require('../../models');
-const { findAll } = require('../../models/User');
+const { Comment } = require('../../models');
+
 
 //============================= USER Comment API ROUTES =============================//
 
