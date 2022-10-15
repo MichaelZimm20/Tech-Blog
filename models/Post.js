@@ -21,7 +21,7 @@ Post.init(
             allowNull: false,
         },
         posted_note: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT('long'),
             allowNull: false,
         },
          // define an user_id column
