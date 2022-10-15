@@ -120,20 +120,5 @@ router.delete('/:id', (req,res) => {
  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // exports routes 
 module.exports = router;

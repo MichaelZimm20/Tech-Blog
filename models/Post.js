@@ -43,5 +43,5 @@ Post.init(
 
 
 
-
+// export post model
 module.exports = Post;
