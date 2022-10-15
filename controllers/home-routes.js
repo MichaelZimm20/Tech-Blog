@@ -43,6 +43,11 @@ router.get('/', (req, res) => {
 // GET , get and render login handlebars page 
 router.get('/login', (req,res) => {
     res.render('login');
+});
+
+// GET , get and render signup handlebars page 
+router.get('/signup', (req,res) => {
+    res.render('signup');
 })
 
 // export router
