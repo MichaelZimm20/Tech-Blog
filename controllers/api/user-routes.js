@@ -62,7 +62,16 @@ router.post('/', (req,res) => {
         username: req.body.username,
         password: req.body.password
     })
-    .then(createUserData => res.json(createUserData))
+    .then(createUserData => {
+        req.session.save(() => {
+            // session variables
+            req.session.user_id = createUserData.id;
+            req.session.username = createUserData.username;
+            req.session.loggedIn = true;
+            
+            res.json(createUserData);
+        })
+    })
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -87,10 +96,32 @@ router.post('/login', (req,res) => {
             res.status(400).json({ message: 'Incorrect Password, please try again! ' })
             return;
         }
+
+        req.session.save(() => {
+            // session variables
+            req.session.user_id = loggedInUserData.id;
+            req.session.username = loggedInUserData.username;
+            req.session.loggedIn = true;
+      
+           
         // if correct, log user in and notify the user
         res.json({ user: loggedInUserData, message: 'You are now logged in! Welcome to the Tech-Blog!'});
-    })
+        });
+    });
 });
+
+
+//POST, allow user to logout 
+router.post('/logout', (req,res) => {
+    if (req.session.loggedIn) {
+        // destroy the session of a loggedIn user 
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+})
 
 // PUT, UPDATE user by ID 
 router.put('/:id', (req,res) => {

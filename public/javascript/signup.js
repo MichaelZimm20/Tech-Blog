@@ -1,4 +1,6 @@
-function signupFormHandler(event) {
+
+
+async function signupFormHandler(event) {
     event.preventDefault();
 
     // retrieving values from user sign-up
@@ -7,8 +9,9 @@ function signupFormHandler(event) {
     console.log("username", username);
     console.log("password", password);
     
+    // fetch to post new user to database 
     if (username && password) {
-        fetch('/api/users', {
+      const res =  await fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
                 username,
@@ -16,7 +19,13 @@ function signupFormHandler(event) {
             }),
             headers: { 'Content-Type': 'application/json' }
         })
-        .then((res) => {console.log(res)})
+       
+        // check the response status, error handling 
+        if (res.ok) {
+            console.log('Successfully added new user!')
+        } else {
+            alert(res.statusText);
+        }
     }
 }
 

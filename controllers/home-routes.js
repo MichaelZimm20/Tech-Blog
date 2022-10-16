@@ -8,6 +8,10 @@ const { Post, User , Comment } = require('../models');
 // GET, get all comments from a user 
 router.get('/', (req, res) => {
     console.log('======================');
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
     Post.findAll({
         attributes: ['id', 'title', 'posted_note', 'created_at'],
 
@@ -42,11 +46,21 @@ router.get('/', (req, res) => {
 
 // GET , get and render login handlebars page 
 router.get('/login', (req,res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    
     res.render('login');
 });
 
 // GET , get and render signup handlebars page 
 router.get('/signup', (req,res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    
     res.render('signup');
 })
 
