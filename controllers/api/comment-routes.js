@@ -21,16 +21,20 @@ router.get('/', (req, res) => {
 
 // POST, create a new comment by user 
 router.post('/', (req,res) => {
-    Comment.create({
+    if (req.session) {
+        Comment.create({
         comment_text: req.body.comment_text,
-        user_id: req.body.user_id,
-        post_id: req.body.post_id
+        post_id: req.body.post_id,
+        user_id: req.body.user_id
+        
     })
         .then(createPostData => res.json(createPostData))
             .catch(err => {
                 console.log(err)
                 res.status(400).json(err);
             });
+    }
+     
 });
 
 // DELETE, delete a comment from a ppst 

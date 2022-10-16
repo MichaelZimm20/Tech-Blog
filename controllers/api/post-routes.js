@@ -39,11 +39,21 @@ router.get('/', (req, res) => {
 // GET, get single users' post
 router.get('/:id', (req, res) => {
     Post.findOne({
-        where: { id: req.params.id },
+        where: { 
+            id: req.params.id 
+        },
         attributes: ['id', 'title', 'posted_note', 'created_at'],
 
         // JOIN tables 
         include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
             {
                 model: User,
                 attributes: ['username']
