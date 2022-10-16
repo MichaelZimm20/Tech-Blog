@@ -1,0 +1,12 @@
+<article class="post">
+      <div class="title">
+        <a href="/post/{{post.id}}" target="_blank">{{post.title}}</a>
+        <span class="justify">(Posted by {{post.user.username}} on {{post.created_at}})</span>
+      </div>
+      <div class="meta">
+        {{post.posted_note}}
+        <a href="/post/{{post.id}}" class="justify">{{post.comments.length}} comment(s)</a>
+      </div>
+    </article>
+
+      
