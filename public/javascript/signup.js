@@ -11,7 +11,7 @@ async function signupFormHandler(event) {
     
     // fetch to post new user to database 
     if (username && password) {
-      const res =  await fetch('/api/users', {
+      const response =  await fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
                 username,
@@ -21,10 +21,10 @@ async function signupFormHandler(event) {
         })
        
         // check the response status, error handling 
-        if (res.ok) {
+        if (response.ok) {
             console.log('Successfully added new user!')
         } else {
-            alert(res.statusText);
+            alert(response.statusText);
         }
     }
 }

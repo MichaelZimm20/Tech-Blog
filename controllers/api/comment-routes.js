@@ -21,19 +21,28 @@ router.get('/', (req, res) => {
 
 // POST, create a new comment by user 
 router.post('/', (req,res) => {
-    if (req.session) {
+   if (req.session) {
         Comment.create({
         comment_text: req.body.comment_text,
-        post_id: req.body.post_id,
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
+        post_id: req.body.post_id
         
     })
         .then(commentData => res.json(commentData))
-            .catch(err => {
+           .catch(err => {
                 console.log(err)
                 res.status(400).json(err);
-            });
-    }
+            }); 
+
+            // Comment.create({ ...req.body, user_id: req.session.user_id })
+            // .then(commentData => {
+            //     res.json(commentData);
+            // })
+            // .catch(err => {
+            //     console.log(err)
+            //     res.status(400).json(err);
+            // })
+   }
      
 });
 

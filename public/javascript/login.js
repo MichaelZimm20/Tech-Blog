@@ -9,7 +9,7 @@ async function loginFormHandler(event) {
     
     // fetch to post new user to database 
     if (username && password) {
-      const res =  await fetch('/api/users/login', {
+      const response =  await fetch('/api/users/login', {
             method: 'post',
             body: JSON.stringify({
                 username,
@@ -19,10 +19,10 @@ async function loginFormHandler(event) {
         })
        
         // check the response status, error handling 
-        if (res.ok) {
+        if (response.ok) {
             document.location.replace('/')
         } else {
-            alert(res.statusText);
+            alert(response.statusText);
         }
     }
 }

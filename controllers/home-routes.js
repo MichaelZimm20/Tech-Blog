@@ -48,7 +48,12 @@ router.get('/post/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'title', 'created_at', 'posted_note'],
+        attributes: [
+            'id', 
+            'title',
+            'posted_note',
+            'created_at' 
+        ],
 
         // JOIN tables 
         include: [
@@ -66,17 +71,20 @@ router.get('/post/:id', (req, res) => {
             }
         ]
     })
-        .then(singlePostData => {
-            if (!singlePostData) {
+        .then(dbPostData => {
+            if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
 
             // console.log("singlepost", singlePostData);
             // serialize data
-            const post = singlePostData.get({ plain: true })
+            const post = dbPostData.get({ plain: true })
             // render data to template, single-psot
-            res.render('single-post', { post });
+            res.render('single-post', { 
+                post,
+                loggedIn: req.session.loggedIn 
+            });
         })
         .catch(err => {
             console.log(err);

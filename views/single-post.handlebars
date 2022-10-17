@@ -11,6 +11,7 @@
     </article>
 
     {{!-- form for comments --}}
+    {{#if loggedIn}}
       <form class="comment-form">
         <div>
             <textarea name="comment-body"></textarea>    
@@ -20,6 +21,7 @@
             <button class="btn btn-outline-warning" type="submit">add comment</button>
         </div>
       </form>
+    {{/if}}
 
     {{!-- current created comments --}}
     <div class="comments">
