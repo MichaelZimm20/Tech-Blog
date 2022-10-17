@@ -75,7 +75,9 @@ form label {
 }
 
 .justify {
-  display: inline;
+  display: flex;
+  justify-content: end;
+
  }
 
 .justifyComment {
