@@ -1,10 +1,10 @@
  <article class="post">
       <div class="title">
         <a href="/post/{{id}}" target="_blank" >{{title}}</a>
-        <span class="justify">(Posted by {{user.username}} on {{created_at}})</span>
+        <span class="justify">(Posted by {{user.username}} on {{format_date created_at}})</span>
       </div>
       <div class="meta">
         {{posted_note}}
-        <a href="/post/{{id}}" class="justifyComment border-bottom">{{comments.length}} comment(s)</a>
+        <a href="/post/{{id}}" class="justifyComment border-bottom">{{comments.length}} {{format_plural "comment" comments.length}} </a>
       </div>
     </article>

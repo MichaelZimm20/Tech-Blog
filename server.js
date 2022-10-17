@@ -23,10 +23,13 @@ const sess = {
       db: sequelize
     })
   };
-  app.use(session(sess));
+app.use(session(sess));
+
+// import helper functions 
+const helpers = require('./utils/helpers');
 
 // handlebars engine and setup
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
