@@ -8,10 +8,7 @@ const { Post, User , Comment } = require('../models');
 // GET, get all comments from a user 
 router.get('/', (req, res) => {
     console.log('======================');
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
+   
     Post.findAll({
         attributes: ['id', 'title', 'posted_note', 'created_at'],
 
@@ -34,7 +31,10 @@ router.get('/', (req, res) => {
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }))
             // render homepage handlebars to display html
-            res.render('homepage', { posts });
+            res.render('homepage', { 
+                posts,
+                loggedIn: req.session.loggedIn 
+            });
         })
         .catch(err => {
             console.log(err);
