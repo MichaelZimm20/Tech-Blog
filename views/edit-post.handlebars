@@ -11,13 +11,13 @@
       </div>
       <div>
             <label for="posted-note" class="card-title font-weight-bold">Edit Posted Note Here:</label>
-            <textarea class="form-control" name="comment-body">{{post.posted_note}}</textarea>
+            <textarea class="form-control" name="note-body">{{post.posted_note}}</textarea>
             
       </div>
 
       <div class="mb-3">
         <button type="submit" class="btn btn-primary">Save post</button>
-        <button type="button" class="btn btn-danger">Delete post</button>
+        <button type="button" class="delete btn btn-danger">Delete post</button>
       </div>
 
     </form>
@@ -25,3 +25,9 @@
 </article>
 
  {{> comments post.comments}}
+
+
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comment.js"></script>
