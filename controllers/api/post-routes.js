@@ -4,6 +4,9 @@ const router = require('express').Router();
 // import models 
 const { Post, User , Comment } = require('../../models');
 
+// protecting routes with middleware and ensuring a user is loggedIn
+const withAuth = require('../../utils/auth');
+
 //============================= USER POST API ROUTES =============================//
 
 // GET, get all users posts
@@ -75,7 +78,7 @@ router.get('/:id', (req, res) => {
 
 
 // POST, create a new user post
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         posted_note: req.body.posted_note,
@@ -90,7 +93,7 @@ router.post('/', (req, res) => {
 
 
 // PUT, update user post
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
             title: req.body.title,
@@ -117,7 +120,7 @@ router.put('/:id', (req, res) => {
 
 
 // DELETE, delete a user's post
-router.delete('/:id', (req,res) => {
+router.delete('/:id', withAuth, (req,res) => {
     Post.destroy({
         where: {
             id: req.params.id

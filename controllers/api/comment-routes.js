@@ -4,6 +4,8 @@ const router = require('express').Router();
 // import models 
 const { Comment } = require('../../models');
 
+// protecting routes with middleware and ensuring a user is loggedIn
+const withAuth = require('../../utils/auth');
 
 //============================= USER Comment API ROUTES =============================//
 
@@ -20,7 +22,7 @@ router.get('/', (req, res) => {
 
 
 // POST, create a new comment by user 
-router.post('/', (req,res) => {
+router.post('/', withAuth, (req,res) => {
    if (req.session) {
         Comment.create({
         comment_text: req.body.comment_text,
@@ -47,7 +49,7 @@ router.post('/', (req,res) => {
 });
 
 // DELETE, delete a comment from a ppst 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', withAuth, (req,res) => {
     Comment.destroy({
         where: {
             id: req.params.id
