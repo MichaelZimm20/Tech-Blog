@@ -1,10 +1,12 @@
- <article class="post">
-      <div class="title">
-        <a href="/post/{{id}}" target="_blank" >{{title}}</a>
-        <span class="justify">(Posted by {{user.username}} on {{format_date created_at}})</span>
+ <article class="post card-body m-0">
+  <div class="card">
+      <div class="title d-flex card-header ">
+        <a href="/post/{{id}}">{{title}}</a>
+        <div class="justify-content-between"><span>(Posted by {{user.username}} on {{format_date created_at}})</span></div>
       </div>
-      <div class="meta">
-        {{posted_note}}
-        <a href="/post/{{id}}" class="justifyComment border-bottom">{{comments.length}} {{format_plural "comment" comments.length}} </a>
+      <div class="meta border-bottom card-body">
+       <div class="card-text">{{posted_note}}</div>
+        <a href="/post/{{id}}" class="justifyComment">{{comments.length}} {{format_plural "comment" comments.length}} </a>
       </div>
-    </article>
+    </div>
+</article>
