@@ -22,6 +22,7 @@ async function signupFormHandler(event) {
        
         // check the response status, error handling 
         if (response.ok) {
+            document.location.replace('/login')
             console.log('Successfully added new user!')
         } else {
             alert(response.statusText);
