@@ -25,21 +25,7 @@ router.get('/:id', (req, res) => {
         // PASSWORD protection
         attributes: { exclude: ['password'] },
         // get the id parameter
-        where: { id: req.params.id },
-        include: [
-            {
-                model: Post, 
-                attributes: ['id', 'title', 'posted_note', 'created_at']
-            },
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'created_at'],
-                include: {
-                    model: Post,
-                    attributes: ['title']
-                }
-            }
-        ]
+        where: { id: req.params.id }
     })
         .then(singleUserData => {
             if (!singleUserData) {
@@ -63,14 +49,16 @@ router.post('/', (req,res) => {
         password: req.body.password
     })
     .then(createUserData => {
-        req.session.save(() => {
-            // session variables
-            req.session.user_id = createUserData.id;
-            req.session.username = createUserData.username;
-            req.session.loggedIn = true;
+        // req.session.save(() => {
+        //     // session variables
+        //     req.session.user_id = createUserData.id;
+        //     req.session.username = createUserData.username;
+        //     req.session.loggedIn = true;
+
             
-            res.json(createUserData);
-        })
+            
+        // })
+        res.json(createUserData);
     })
     .catch(err => {
         console.log(err);
@@ -149,7 +137,7 @@ router.put('/:id', (req,res) => {
 
 
 // DELETE, DESTROY user by ID 
-router.post('/:id', (req,res) => {
+router.delete('/:id', (req,res) => {
     User.destroy({ 
         where: {
             id: req.params.id
